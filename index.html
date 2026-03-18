@@ -308,18 +308,18 @@
           <a href="https://note.com/junji_07" target="_blank" rel="noopener" class="note-all-link reveal d1">すべて読む →</a>
         </div>
         <div class="note-grid">
-          <a href="https://note.com/junji_07/n/nb33f8c46d2db" target="_blank" rel="noopener" class="note-card reveal">
+          <a href="https://note.com/junji_07/n/n386b196861fc" target="_blank" rel="noopener" class="note-card reveal">
+            <span class="note-date">2026.03.18</span>
+            <p class="note-title">CRMが機能しない理由──企業は比較を設計し、顧客は意味を形成している</p>
+          </a>
+          <a href="https://note.com/junji_07/n/nb33f8c46d2db" target="_blank" rel="noopener" class="note-card reveal d1">
             <span class="note-date">2026.03.04</span>
             <p class="note-title">なぜ正しい意思決定ほど空回りするのか</p>
           </a>
-          <a href="https://note.com/junji_07/n/nd65d932c3c11" target="_blank" rel="noopener" class="note-card reveal d1">
+          <a href="https://note.com/junji_07/n/nd65d932c3c11" target="_blank" rel="noopener" class="note-card reveal d2">
             <span class="note-date">2026.02.09</span>
             <p class="note-title">オンボーディングで決まるのは戦力化ではなく文化</p>
           </a>
-          <div class="note-card note-card--soon reveal d2">
-            <span class="note-date">Coming Soon</span>
-            <p class="note-title note-title--soon">Coming Soon</p>
-          </div>
         </div>
       </div>
     </section>
@@ -456,6 +456,10 @@
             notice.classList.add('is-success');
             notice.innerHTML = '<span class="notice-check">メッセージ送信完了</span><span class="notice-line1">送信しました。</span><span class="notice-line2">2営業日以内にご連絡いたします。</span>';
             notice.style.display = 'block';
+            // GA4: フォーム送信成功時にイベント送信
+            gtag('event', 'form_submit', {
+              'form_name': '対話を始める'
+            });
           } else { throw new Error('server error'); }
         } catch (_) {
           notice.classList.add('is-error');
@@ -463,13 +467,6 @@
           notice.style.display = 'block';
         }
         btn.textContent = '送　る'; btn.disabled = false;
-
-        // GA4: フォーム送信成功時にイベント送信
-        if (res.ok) {
-          gtag('event', 'form_submit', {
-            'form_name': '対話を始める'
-          });
-        }
       });
     }
 
